@@ -1,17 +1,29 @@
-import Header from '@/Layout/Header'
 import TaskLevel from '@/components/TaskLevel'
 import React, { useState } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { BiFilter } from 'react-icons/bi'
 import { RxCaretSort } from 'react-icons/rx'
 import Layout from '@/Layout/Layout'
+import { AiOutlinePlus } from 'react-icons/ai'
+import TaskModal from '@/components/TaskModal'
+import { useDispatch } from 'react-redux'
+import { taskModalOpen } from '@/feature/modal/taskModalSlice'
+
+
 const Home = () => {
 
   const [showFilterBox, setShowFilterBox] = useState(false)
   const [showSortBox, setshowSortBox] = useState(false)
 
+  const dispatch = useDispatch()
+
   return (
     <Layout>
+      <TaskModal />
+      <div onClick={() => dispatch(taskModalOpen())} className='p-3 bg-purple-700 right-12 bottom-10 fixed flex items-center gap-2 rounded-sm cursor-pointer shadow-md'>
+        <AiOutlinePlus className='text-white ' size={22} />
+        <p className='font-medium text-[15px] text-white'>Task</p>
+      </div>
       <div className='px-[80px] flex items-center justify-between bg-white h-11'>
         <div className='flex items-center relative w-[30%]'>
           <input type="text" placeholder='Search task' className='px-3 py-[6px] text-slate-700 text-[15px] font-medium focus:outline-none bg-slate-200 w-[100%] rounded-sm' />
